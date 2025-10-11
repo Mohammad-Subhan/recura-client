@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0A0A0A;
+  --color-bg-secondary: #161616;
+  --color-text: #FAFAFA;
+  --color-input-bg: #151515;
+  --color-input-border: #373737;
+  --color-text-secondary: #FAFAFA99;
+  --color-text-placeholder: #A1A1A1;
+  --color-button: #E5E5E5;
+  --color-button-secondary: #151515;
+  --color-border: #272727;
+}

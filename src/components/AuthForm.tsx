@@ -43,7 +43,7 @@ const AuthForm = ({ isLogin }: { isLogin: boolean }) => {
             </div>
 
             <Button className="bg-button-secondary w-full rounded-2xl text-text cursor-pointer hover:bg-button/7 font-semibold text-[14px] border-[1px] border-input-border ">
-                <Image src="/google.svg" alt="Google Icon" width={15} height={15} />
+                <Image src="/icons/google.svg" alt="Google Icon" width={15} height={15} />
                 Continue with Google
             </Button>
 

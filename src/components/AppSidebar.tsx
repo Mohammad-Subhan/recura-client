@@ -46,7 +46,7 @@ const AppSidebar = () => {
         <Sidebar className="bg-bg border-none">
             <SidebarContent className="flex flex-col w-full h-full px-[30px] py-[35px] gap-[60px]">
                 <div className="flex justify-center items-center gap-[10px]">
-                    <Image src={"icons/logo.svg"} alt="Recura Logo" width={40} height={40} />
+                    <Image src={"/icons/logo.svg"} alt="Recura Logo" width={40} height={40} />
                     <p className="text-[26px] font-semibold">Recura</p>
                 </div>
 
@@ -93,7 +93,7 @@ const MenuItem = ({ item, activeItem, setActiveItem }: { item: MenuItemProps, ac
     }
 
     return (
-        <div className={`flex items-center gap-4 cursor-pointer p-[10px] ${isActive && "bg-bg-secondary"} rounded-2xl`} onClick={onClick}>
+        <div className={`flex items-center gap-4 cursor-pointer p-[10px] ${isActive ? "bg-bg-secondary" : "hover:bg-bg-secondary/20"} rounded-2xl`} onClick={onClick}>
             <Image src={isActive ? item.activeIcon : item.icon} alt={item.label} width={24} height={24} />
             <p className={`text-sm font-medium ${isActive ? "text-text" : "text-text-secondary"}`}>{item.label}</p>
         </div>

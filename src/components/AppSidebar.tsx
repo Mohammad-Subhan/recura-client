@@ -1,37 +1,33 @@
 "use client"
 
-import React, { useState } from 'react'
+import React from 'react'
 import { Sidebar, SidebarContent } from './ui/sidebar'
 import Image from 'next/image'
 import { Separator } from './ui/separator'
 import { Button } from './ui/button'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 
 const menuItems = [
     {
         label: "Home",
-        name: "home",
         icon: "/icons/home.svg",
         activeIcon: "/icons/home-active.svg",
         link: "/dashboard"
     },
     {
         label: "My Library",
-        name: "library",
         icon: "/icons/library.svg",
         activeIcon: "/icons/library-active.svg",
         link: "/dashboard/library"
     },
     {
         label: "Billing",
-        name: "billing",
         icon: "/icons/card.svg",
         activeIcon: "/icons/card-active.svg",
         link: "/dashboard/billing"
     },
     {
         label: "Settings",
-        name: "settings",
         icon: "/icons/settings.svg",
         activeIcon: "/icons/settings-active.svg",
         link: "/dashboard/settings"
@@ -40,8 +36,7 @@ const menuItems = [
 
 const AppSidebar = () => {
 
-    const [activeItem, setActiveItem] = useState<string>("home");
-
+    const pathname = usePathname()
     return (
         <Sidebar className="bg-bg border-none">
             <SidebarContent className="flex flex-col w-full h-full px-[30px] py-[35px] gap-[60px]">
@@ -54,7 +49,7 @@ const AppSidebar = () => {
                     <div className="flex flex-col gap-[5px]">
                         <p className="font-semibold text-sm text-text-secondary pb-[15px]">Menu</p>
                         {menuItems.map((item, index) => (
-                            <MenuItem key={index} item={item} activeItem={activeItem} setActiveItem={setActiveItem} />
+                            <MenuItem key={index} item={item} currentPath={pathname} />
                         ))}
                     </div>
 
@@ -79,16 +74,14 @@ interface MenuItemProps {
     icon: string;
     activeIcon: string;
     link: string;
-    name: string;
 }
 
-const MenuItem = ({ item, activeItem, setActiveItem }: { item: MenuItemProps, activeItem: string, setActiveItem: (name: string) => void }) => {
+const MenuItem = ({ item, currentPath }: { item: MenuItemProps, currentPath: string }) => {
 
-    const isActive: boolean = activeItem == item.name;
+    const isActive: boolean = currentPath === item.link;
     const router = useRouter();
 
     const onClick = () => {
-        setActiveItem(item.name);
         router.push(item.link);
     }
 

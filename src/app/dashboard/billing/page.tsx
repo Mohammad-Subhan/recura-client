@@ -1,11 +1,12 @@
 "use client"
 
+import Heading from '@/components/Heading'
 import React from 'react'
 
 const Billing = () => {
     return (
-        <div className="h-full w-full">
-            <h1 className="text-2xl font-bold">Billing</h1>
+        <div className="h-full w-full flex flex-col gap-[35px] ">
+            <Heading label="Billing" />
         </div>
     )
 }

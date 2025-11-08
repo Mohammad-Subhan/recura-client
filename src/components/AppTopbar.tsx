@@ -16,7 +16,7 @@ const AppTopbar = () => {
             <div className="flex items-center gap-4">
                 <Button className="bg-button rounded-2xl text-bg cursor-pointer hover:bg-button/95 font-semibold text-[14px]">
                     <Image src={"/icons/upload.svg"} alt="upload" width={16} height={16} />
-                    Upgrade
+                    Upload
                 </Button>
                 <Button className="bg-button rounded-2xl text-bg cursor-pointer hover:bg-button/95 font-semibold text-[14px]">
                     <Image src={"/icons/record.svg"} alt="upload" width={16} height={16} />

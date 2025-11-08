@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+:root {
+  color: var(--color-text);
+}
 
 @theme {
   --color-bg: #0A0A0A;
@@ -12,4 +15,7 @@
   --color-button: #E5E5E5;
   --color-button-secondary: #151515;
   --color-border: #272727;
+
+  /* Breakpoints */
+  --breakpoint-xs: 480px;
 }

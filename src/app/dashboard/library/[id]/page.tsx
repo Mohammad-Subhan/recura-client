@@ -78,7 +78,7 @@ const VideoPage = ({ params }: { params: Promise<{ id: string }> }) => {
                 </div>
 
                 {/* Right Side - Tabs */}
-                <div className="w-[400px] flex flex-col gap-6">
+                <div className="w-full lg:w-[400px] flex flex-col gap-6">
                     {/* Tabs Navigation */}
                     <div className="flex items-center gap-6 relative">
                         <Button

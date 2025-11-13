@@ -48,10 +48,10 @@ const AppTopbar = () => {
 
     return (
         <>
-            <div className="flex items-center p-5 justify-between">
-                <div className="flex items-center gap-1 border border-border rounded-full px-4">
+            <div className="flex sm:flex-row flex-col items-end p-5 justify-between gap-4">
+                <div className="flex w-full sm:max-w-[300px] items-center gap-1 border border-border rounded-full px-4">
                     <Image src={"/icons/search.svg"} alt="Search" width={20} height={20} />
-                    <Input type="text" placeholder="Search..." className="w-[300px] h-[40px] text-text placeholder:text-text-secondary border-none focus-visible:ring-0" />
+                    <Input type="text" placeholder="Search..." className="w-full h-[40px] text-text placeholder:text-text-secondary border-none focus-visible:ring-0" />
                 </div>
 
                 <div className="flex items-center gap-4">

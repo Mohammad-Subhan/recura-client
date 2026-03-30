@@ -27,8 +27,8 @@ const ForgotPassword = () => {
             const response = await api.post("/api/auth/forgot-password", { email });
             toast.success(response.data.message || "Reset OTP sent to your email!");
             router.push(`/auth/reset-password?email=${encodeURIComponent(email)}`);
-        } catch (error: any) {
-            const errorMessage = error.response?.data?.message || "Failed to send reset email";
+        } catch (error) {
+            const errorMessage = (error as { response?: { data?: { message?: string } } }).response?.data?.message || "Failed to send reset email";
             toast.error(errorMessage);
         } finally {
             setLoading(false);
@@ -47,7 +47,7 @@ const ForgotPassword = () => {
                 </div>
 
                 <div className="text-center text-xs flex flex-col">
-                    <p className="text-text/60">Enter your email address and we'll send you an OTP to reset your password.</p>
+                    <p className="text-text/60">Enter your email address and we&apos;ll send you an OTP to reset your password.</p>
                 </div>
 
                 <div className="w-full flex flex-col gap-2 p-0">

@@ -60,9 +60,9 @@ const PersonalInfoTab = () => {
                 setPreviewImage(null) // Use stored URL from now on
                 toast.success("Profile image updated")
             }
-        } catch (error: any) {
+        } catch (error) {
             setPreviewImage(null)
-            const errorMessage = error.response?.data?.message || "Failed to upload image"
+            const errorMessage = (error as { response?: { data?: { message?: string } } }).response?.data?.message || "Failed to upload image"
             toast.error(errorMessage)
         } finally {
             setImageLoading(false)
@@ -83,8 +83,8 @@ const PersonalInfoTab = () => {
                 profileImage: null,
             }))
             toast.success("Profile image removed")
-        } catch (error: any) {
-            const errorMessage = error.response?.data?.message || "Failed to remove image"
+        } catch (error) {
+            const errorMessage = (error as { response?: { data?: { message?: string } } }).response?.data?.message || "Failed to remove image"
             toast.error(errorMessage)
         } finally {
             setImageLoading(false)
@@ -110,8 +110,8 @@ const PersonalInfoTab = () => {
                 }))
                 toast.success(response.data.message || "Profile updated successfully")
             }
-        } catch (error: any) {
-            const errorMessage = error.response?.data?.message || "Failed to update profile"
+        } catch (error) {
+            const errorMessage = (error as { response?: { data?: { message?: string } } }).response?.data?.message || "Failed to update profile"
             toast.error(errorMessage)
         } finally {
             setNameLoading(false)

@@ -20,8 +20,8 @@ const TranscriptionTab = ({ videoId, transcription }: { videoId: string, transcr
             toast.success("Transcription generated successfully!")
             // Refresh the page to show updated transcription
             router.refresh()
-        } catch (error: any) {
-            const errorMessage = error?.response?.data?.message || "Failed to generate transcription"
+        } catch (error) {
+            const errorMessage = (error as { response?: { data?: { message?: string } } })?.response?.data?.message || "Failed to generate transcription"
             toast.error(errorMessage)
         } finally {
             setIsGenerating(false)

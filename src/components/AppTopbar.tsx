@@ -174,7 +174,7 @@ const AppTopbar = () => {
             formData.append('description', description)
 
             // Upload with progress tracking
-            const response = await api.post('/api/library/upload-file', formData, {
+            await api.post('/api/library/upload-file', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -199,9 +199,9 @@ const AppTopbar = () => {
 
             // Dispatch refetch to refresh the library page instantly
             dispatch(triggerRefetch())
-        } catch (error: any) {
+        } catch (error) {
             console.error("Upload error:", error)
-            const errorMessage = error.response?.data?.message || "Failed to upload video"
+            const errorMessage = (error as { response?: { data?: { message?: string } } }).response?.data?.message || "Failed to upload video"
             toast.error(errorMessage)
         } finally {
             setIsUploading(false)

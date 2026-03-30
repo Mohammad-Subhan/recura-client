@@ -5,8 +5,8 @@ import React, { useEffect, useState } from 'react'
 import { Video } from '@/store/slices/videoSlice'
 import api from '@/lib/api'
 import toast from 'react-hot-toast'
-import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import Image from 'next/image'
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 const formatDuration = (seconds: number): string => {
@@ -62,8 +62,8 @@ const SharePage = ({ params }: { params: Promise<{ shareLink: string }> }) => {
                 setError(null)
                 const response = await api.get(`/api/library/share/${shareLink}`)
                 setVideo(response.data.data as Video)
-            } catch (err: any) {
-                const message = err?.response?.data?.message || 'Video not found or no longer available'
+            } catch (err) {
+                const message = (err as { response?: { data?: { message?: string } } })?.response?.data?.message || 'Video not found or no longer available'
                 setError(message)
                 toast.error(message)
             } finally {
@@ -87,7 +87,7 @@ const SharePage = ({ params }: { params: Promise<{ shareLink: string }> }) => {
             {/* ── Minimal nav bar ────────────────────────────────────────── */}
             <header className="w-full border-b border-border px-6 py-4 flex items-center gap-3">
                 <Link href="/" className="flex items-center gap-2">
-                    <img src="/icons/logo.svg" alt="Recura" width={28} height={28} />
+                    <Image src="/icons/logo.svg" alt="Recura" width={28} height={28} />
                     <span className="text-sm font-semibold tracking-tight text-text/70">Recura</span>
                 </Link>
             </header>

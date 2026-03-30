@@ -77,8 +77,8 @@ const ResetPasswordContent = () => {
                 toast.success(response.data.message || "Password reset successful!");
                 router.push("/auth/login");
             }
-        } catch (error: any) {
-            const errorMessage = error.response?.data?.message || "Password reset failed";
+        } catch (error) {
+            const errorMessage = (error as { response?: { data?: { message?: string } } }).response?.data?.message || "Password reset failed";
             toast.error(errorMessage);
         } finally {
             setLoading(false);
@@ -95,8 +95,8 @@ const ResetPasswordContent = () => {
             setCooldown(60);
             setOtp(Array(6).fill(""));
             inputRefs.current[0]?.focus();
-        } catch (error: any) {
-            const errorMessage = error.response?.data?.message || "Failed to resend OTP";
+        } catch (error) {
+            const errorMessage = (error as { response?: { data?: { message?: string } } }).response?.data?.message || "Failed to resend OTP";
             toast.error(errorMessage);
         } finally {
             setResendLoading(false);

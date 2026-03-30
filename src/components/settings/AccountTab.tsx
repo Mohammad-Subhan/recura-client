@@ -63,8 +63,8 @@ const AccountTab = () => {
             const response = await api.patch("/api/user/me/password", { currentPassword, newPassword })
             toast.success(response.data.message || "Password changed successfully")
             handlePasswordModalClose()
-        } catch (error: any) {
-            const errorMessage = error.response?.data?.message || "Failed to change password"
+        } catch (error) {
+            const errorMessage = (error as { response?: { data?: { message?: string } } }).response?.data?.message || "Failed to change password"
             toast.error(errorMessage)
         } finally {
             setPasswordLoading(false)

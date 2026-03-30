@@ -3,7 +3,7 @@
 import Heading from '@/components/Heading'
 import VideoCard from '@/components/VideoCard'
 import Image from 'next/image'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { setVideos, setSearch, setSortBy, setOrder, triggerRefetch } from '@/store/slices/videoSlice'
 import { Video } from '@/store/slices/videoSlice'
@@ -57,7 +57,7 @@ const Library = () => {
     const dropdownRef = useRef<HTMLDivElement>(null)
     const searchDebounce = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-    const fetchVideos = async (params: { sortBy?: string; order?: string; search?: string } = {}) => {
+    const fetchVideos = useCallback(async (params: { sortBy?: string; order?: string; search?: string } = {}) => {
         try {
             setLoading(true)
             setError(null)
@@ -70,12 +70,12 @@ const Library = () => {
         } finally {
             setLoading(false)
         }
-    };
+    }, [dispatch]);
 
     // Initial fetch
     useEffect(() => {
         fetchVideos({ sortBy, order, search })
-    }, [fetchTrigger]);
+    }, [fetchTrigger, fetchVideos, sortBy, order, search]);
 
     // Close dropdown on outside click
     useEffect(() => {

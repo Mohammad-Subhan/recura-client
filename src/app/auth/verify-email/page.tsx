@@ -55,8 +55,8 @@ const VerifyContent = () => {
                 toast.success(response.data.message || "Email verified successfully!");
                 router.push("/auth/login");
             }
-        } catch (error: any) {
-            const errorMessage = error.response?.data?.message || "Verification failed";
+        } catch (error) {
+            const errorMessage = (error as { response?: { data?: { message?: string } } }).response?.data?.message || "Verification failed";
             toast.error(errorMessage);
         } finally {
             setLoading(false);
@@ -74,8 +74,8 @@ const VerifyContent = () => {
             // Clear OTP inputs
             setOtp(Array(6).fill(""));
             inputRefs.current[0]?.focus();
-        } catch (error: any) {
-            const errorMessage = error.response?.data?.message || "Failed to resend OTP";
+        } catch (error) {
+            const errorMessage = (error as { response?: { data?: { message?: string } } }).response?.data?.message || "Failed to resend OTP";
             toast.error(errorMessage);
         } finally {
             setResendLoading(false);

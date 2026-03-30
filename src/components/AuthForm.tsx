@@ -44,12 +44,12 @@ const AuthForm = ({ isLogin }: { isLogin: boolean }) => {
                 toast.success(response.data.message || "Login successful");
                 router.push("/dashboard");
             }
-        } catch (error: any) {
+        } catch (error) {
             console.log(error);
-            const errorMessage = error.response?.data?.message || "An error occurred";
+            const errorMessage = (error as { response?: { data?: { message?: string }; status?: number } }).response?.data?.message || "An error occurred";
             toast.error(errorMessage);
 
-            if (error.response?.status === 403) {
+            if ((error as { response?: { status?: number } }).response?.status === 403) {
                 setVerifyDialogOpen(true);
             }
         } finally {
@@ -80,9 +80,9 @@ const AuthForm = ({ isLogin }: { isLogin: boolean }) => {
                 toast.success(response.data.message || "Registration successful. Please verify your email.");
                 router.push(`/auth/verify-email?email=${encodeURIComponent(email)}`);
             }
-        } catch (error: any) {
+        } catch (error) {
             console.log(error);
-            const errorMessage = error.response?.data?.message || "An error occurred";
+            const errorMessage = (error as { response?: { data?: { message?: string } } }).response?.data?.message || "An error occurred";
             toast.error(errorMessage);
         } finally {
             setLoading(false);
@@ -96,8 +96,8 @@ const AuthForm = ({ isLogin }: { isLogin: boolean }) => {
             toast.success("Verification email sent!");
             setVerifyDialogOpen(false);
             router.push(`/auth/verify-email?email=${encodeURIComponent(email)}`);
-        } catch (error: any) {
-            const errorMessage = error.response?.data?.message || "Failed to send verification email";
+        } catch (error) {
+            const errorMessage = (error as { response?: { data?: { message?: string } } }).response?.data?.message || "Failed to send verification email";
             toast.error(errorMessage);
         } finally {
             setResendLoading(false);

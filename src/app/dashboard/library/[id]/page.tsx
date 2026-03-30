@@ -11,7 +11,6 @@ import { useRouter } from 'next/navigation'
 import {
     Dialog,
     DialogContent,
-    DialogHeader,
     DialogTitle,
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
@@ -84,8 +83,8 @@ const VideoPage = ({ params }: { params: Promise<{ id: string }> }) => {
                 setError(null)
                 const response = await api.get(`/api/library/${id}`)
                 setVideo(response.data.data as Video)
-            } catch (err: any) {
-                const message = err?.response?.data?.message || 'Failed to load video'
+            } catch (err) {
+                const message = (err as { response?: { data?: { message?: string } } })?.response?.data?.message || 'Failed to load video'
                 setError(message)
                 toast.error(message)
             } finally {
@@ -141,8 +140,8 @@ const VideoPage = ({ params }: { params: Promise<{ id: string }> }) => {
             setVideo(response.data.data as Video)
             toast.success('Video updated!')
             setEditOpen(false)
-        } catch (err: any) {
-            toast.error(err?.response?.data?.message || 'Failed to update video')
+        } catch (err) {
+            toast.error((err as { response?: { data?: { message?: string } } })?.response?.data?.message || 'Failed to update video')
         } finally {
             setEditLoading(false)
         }
@@ -155,8 +154,8 @@ const VideoPage = ({ params }: { params: Promise<{ id: string }> }) => {
             await api.delete(`/api/library/${video._id}`)
             toast.success('Video deleted')
             router.push('/dashboard/library')
-        } catch (err: any) {
-            toast.error(err?.response?.data?.message || 'Failed to delete video')
+        } catch (err) {
+            toast.error((err as { response?: { data?: { message?: string } } })?.response?.data?.message || 'Failed to delete video')
             setDeleteLoading(false)
         }
     }
@@ -365,7 +364,7 @@ const VideoPage = ({ params }: { params: Promise<{ id: string }> }) => {
                         <DialogTitle className="text-xl font-semibold text-text">Delete Video</DialogTitle>
                     </div>
                     <p className="text-sm text-text/50 -mt-2">
-                        Are you sure you want to delete <span className="text-text font-medium">"{video?.title}"</span>? This cannot be undone.
+                        Are you sure you want to delete <span className="text-text font-medium">&ldquo;{video?.title}&rdquo;</span>? This cannot be undone.
                     </p>
                     <div className="flex items-center gap-3">
                         <Button

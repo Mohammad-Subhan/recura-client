@@ -63,8 +63,8 @@ const Library = () => {
             setError(null)
             const response = await api.get('/api/library', { params })
             dispatch(setVideos(response.data.data as Video[]))
-        } catch (err: any) {
-            const message = err?.response?.data?.message || 'Failed to fetch videos'
+        } catch (err) {
+            const message = (err as { response?: { data?: { message?: string } } })?.response?.data?.message || 'Failed to fetch videos'
             setError(message)
             toast.error(message)
         } finally {
@@ -114,8 +114,8 @@ const Library = () => {
             toast.success('Video deleted')
             setVideoToDelete(null)
             dispatch(triggerRefetch()) // dispatch refetch to update both library & sidebar storage
-        } catch (err: any) {
-            toast.error(err?.response?.data?.message || 'Failed to delete video')
+        } catch (err) {
+            toast.error((err as { response?: { data?: { message?: string } } })?.response?.data?.message || 'Failed to delete video')
         } finally {
             setDeleteLoading(false)
         }
@@ -292,7 +292,7 @@ const Library = () => {
                         <DialogTitle className="text-xl font-semibold text-text">Delete Video</DialogTitle>
                     </div>
                     <p className="text-sm text-text/50 -mt-2">
-                        Are you sure you want to delete <span className="text-text font-medium">"{videoToDelete?.title}"</span>? This cannot be undone.
+                        Are you sure you want to delete <span className="text-text font-medium">&ldquo;{videoToDelete?.title}&rdquo;</span>? This cannot be undone.
                     </p>
                     <div className="flex items-center gap-3">
                         <Button

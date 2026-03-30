@@ -180,7 +180,7 @@ const SharePage = ({ params }: { params: Promise<{ shareLink: string }> }) => {
                                 </div>
                             </div>
                         ) : (
-                            <TranscriptionTab transcription={video?.transcription || ""} />
+                            <TranscriptionTab videoId={video?._id || ""} transcription={video?.transcription || ""} />
                         )}
                     </div>
                 </div>
